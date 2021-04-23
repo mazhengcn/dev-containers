@@ -7,7 +7,7 @@ ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
 
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
-ARG USERNAME=none
+ARG USERNAME="none"
 ARG USER_UID=0
 ARG USER_GID=$USER_UID
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
