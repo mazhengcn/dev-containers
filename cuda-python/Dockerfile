@@ -15,18 +15,16 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
     && apt-get purge -y imagemagick imagemagick-6-common \
     # Install common packages, non-root user
-    && apt-get -y install --no-install-recommends curl ca-certificates \
+    && apt-get -y install --no-install-recommends curl ca-certificates python3 python3-pip python3-venv \
     && bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh")" -- "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Setup default python tools in a venv via pipx to avoid conflicts
-ARG PYTHON_VERSION="3.9.4"
-ARG PYTHON_PATH=/usr/local/python
 ENV PIPX_HOME=/usr/local/py-utils \
     PIPX_BIN_DIR=/usr/local/py-utils/bin
-ENV PATH=${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}
+ENV PATH=${PATH}:${PIPX_BIN_DIR}
 # Download script and run it with the option above
-RUN bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/python-debian.sh")" -- "${PYTHON_VERSION}" "${PYTHON_PATH}" "${PIPX_HOME}" "${USERNAME}" \
+RUN bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/python-debian.sh")" -- "none" "/usr/local" "${PIPX_HOME}" "${USERNAME}" \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # # [Option] Install Node.js
