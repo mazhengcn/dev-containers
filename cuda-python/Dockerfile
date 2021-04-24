@@ -1,6 +1,6 @@
 ARG CUDA_VERSION="11.3.0"
 ARG UBUNTU_VERSION="20.04"
-FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu${UBUNTU_VERSION}}
+FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu${UBUNTU_VERSION}
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
