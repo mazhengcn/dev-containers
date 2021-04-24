@@ -1,5 +1,6 @@
-
-FROM nvidia/cuda:11.2.2-runtime-ubuntu20.04
+ARG CUDA_VERSION="11.3.0"
+ARG UBUNTU_VERSION="20.04"
+FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu${UBUNTU_VERSION}}
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
@@ -19,7 +20,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Setup default python tools in a venv via pipx to avoid conflicts
-ARG PYTHON_VERSION="3.8.9"
+ARG PYTHON_VERSION="3.9.4"
 ARG PYTHON_PATH=/usr/local/python
 ENV PIPX_HOME=/usr/local/py-utils \
     PIPX_BIN_DIR=/usr/local/py-utils/bin
