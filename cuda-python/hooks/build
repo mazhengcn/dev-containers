@@ -8,7 +8,7 @@ PYTHON_VERSION=${PYTHON%py}
 
 if [ $DOCKER_TAG == "latest" ]
 then
-  docker build -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+  docker build -t $IMAGE_NAME .
 else
-  docker build --build-arg CUDA_VERSION=${CUDA_VERSION} PYTHON_VERSION=${PYTHON_VERSION} -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+  docker build --build-arg CUDA_VERSION=${CUDA_VERSION} PYTHON_VERSION=${PYTHON_VERSION} -t $IMAGE_NAME .
 fi
