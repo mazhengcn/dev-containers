@@ -1,5 +1,7 @@
 ARG CUDA_VERSION="11.3.0"
 ARG UBUNTU_VERSION="20.04"
+ARG PYTHON_VERSION="3.9"
+
 FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu${UBUNTU_VERSION}
 
 # [Option] Install zsh
@@ -12,10 +14,10 @@ ARG USERNAME="none"
 ARG USER_UID=0
 ARG USER_GID=$USER_UID
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
-    && apt-get purge -y imagemagick imagemagick-6-common \
+    # Install python3.8
+    && apt-get -y install --no-install-recommends curl ca-certificates python${PYTHON_VERSION} python${PYTHON_VERSION}-pip python${PYTHON_VERSION}-venv \
+    && ln -s $(which python3) /usr/local/bin/python \
     # Install common packages, non-root user
-    && apt-get -y install --no-install-recommends curl ca-certificates python3 python3-pip python3-venv \
     && bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh")" -- "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
