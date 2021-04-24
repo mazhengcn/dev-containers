@@ -1,10 +1,10 @@
 #!/bin/bash
 
 CUDA=${DOCKER_TAG%-*}
-CUDA_VERSION=${CUDA%cuda}
+CUDA_VERSION=${CUDA##cuda}
 
 PYTHON=${DOCKER_TAG##*-}
-PYTHON_VERSION=${PYTHON%py}
+PYTHON_VERSION=${PYTHON##py}
 
 if [ $DOCKER_TAG == "latest" ]
 then
