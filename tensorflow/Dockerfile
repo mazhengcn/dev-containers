@@ -1,4 +1,4 @@
-FROM zhengma/cuda-python:cuda11.2.2-py3.8.9
+FROM zhengma/python-3-cuda:11.2.2
 
 # # [Option] Install Node.js
 # ARG INSTALL_NODE="true"
