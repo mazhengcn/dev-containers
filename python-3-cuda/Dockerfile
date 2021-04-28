@@ -17,7 +17,7 @@ ARG USER_UID=0
 ARG USER_GID=$USER_UID
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Install python3
-    && apt-get -y install --no-install-recommends curl ca-certificates python${PYTHON_VERSION} python${PYTHON_VERSION}-venv python${PYTHON_VERSION}-pip \
+    && apt-get -y install --no-install-recommends python${PYTHON_VERSION} python${PYTHON_VERSION}-venv python${PYTHON_VERSION}-pip \
     && ln -s $(which python${PYTHON_VERSION}) /usr/local/bin/python \
     # Install common packages, non-root user
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
