@@ -1,6 +1,7 @@
 ARG CUDA_VERSION="11.3.0"
+ARG CUDNN_VERSION="8"
 ARG UBUNTU_VERSION="20.04"
-FROM nvidia/cuda:${CUDA_VERSION}-runtime-ubuntu${UBUNTU_VERSION}
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-runtime-ubuntu${UBUNTU_VERSION}
 
 # Copy library scripts to execute
 COPY ./library-scripts/*.sh ./library-scripts/*.env /tmp/library-scripts/
