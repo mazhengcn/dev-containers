@@ -101,19 +101,7 @@ if [ "${INSTALL_PYTHON_TOOLS}" != "true" ]; then
     exit 0;
 fi
 
-DEFAULT_UTILS="\
-    pylint \
-    flake8 \
-    autopep8 \
-    black \
-    yapf \
-    mypy \
-    pydocstyle \
-    pycodestyle \
-    bandit \
-    pipenv \
-    virtualenv"
-
+DEFAULT_UTILS="flake8 black"
 
 export PIPX_BIN_DIR=${PIPX_HOME}/bin
 export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}
