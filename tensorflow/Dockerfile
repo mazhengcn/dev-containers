@@ -15,5 +15,5 @@ FROM zhengma/python-3-cuda:11.2.2
 # Set --build-arg TF_PACKAGE_VERSION=1.11.0rc0 to install a specific version.
 # Installs the latest version by default.
 ARG TF_PACKAGE=tensorflow
-ARG TF_PACKAGE_VERSION=2.5.0-rc3
+ARG TF_PACKAGE_VERSION=
 RUN pip3 --disable-pip-version-check --no-cache-dir install ${TF_PACKAGE}${TF_PACKAGE_VERSION:+==${TF_PACKAGE_VERSION}}
