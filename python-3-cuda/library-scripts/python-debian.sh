@@ -4,7 +4,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 #
-# Docs: https://github.com/microsoft/vscode-dev-containers/blob/master/script-library/docs/python.md
+# Docs: https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/python.md
 # Maintainer: The VS Code and Codespaces Teams
 #
 # Syntax: ./python-debian.sh [Python Version] [Python intall path] [PIPX_HOME] [non-root user] [Update rc files flag] [install tools]
@@ -101,7 +101,19 @@ if [ "${INSTALL_PYTHON_TOOLS}" != "true" ]; then
     exit 0;
 fi
 
-DEFAULT_UTILS="flake8 black"
+DEFAULT_UTILS="\
+    pylint \
+    flake8 \
+    autopep8 \
+    black \
+    yapf \
+    mypy \
+    pydocstyle \
+    pycodestyle \
+    bandit \
+    pipenv \
+    virtualenv"
+
 
 export PIPX_BIN_DIR=${PIPX_HOME}/bin
 export PATH=${PYTHON_INSTALL_PATH}/bin:${PIPX_BIN_DIR}:${PATH}
