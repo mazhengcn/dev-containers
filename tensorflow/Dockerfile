@@ -11,7 +11,8 @@ ARG USERNAME="none"
 ARG USER_UID=0
 ARG USER_GID=$USER_UID
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    # Install python3
+    # Install python3-env
+    && apt-get -y install --no-install-recommends python3-venv \
     && ln -s $(which python${PYTHON_VERSION}) /usr/local/bin/python \
     # Install common packages, non-root user
     && bash /tmp/library-scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true" \
