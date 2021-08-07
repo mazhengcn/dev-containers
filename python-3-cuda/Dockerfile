@@ -1,4 +1,4 @@
-ARG CUDA_VERSION="11.3.0"
+ARG CUDA_VERSION="11.4.1"
 ARG CUDNN_VERSION="8"
 ARG UBUNTU_VERSION="20.04"
 FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-runtime-ubuntu${UBUNTU_VERSION}
@@ -6,7 +6,7 @@ FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-runtime-ubuntu${UBUNTU_VE
 # Python version
 ARG PYTHON_VERSION="3"
 # [Option] Install zsh
-ARG INSTALL_ZSH="false"
+ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="true"
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
