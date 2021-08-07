@@ -1,6 +1,9 @@
 ARG TF_VERSION="tf2"
 FROM nvcr.io/nvidia/tensorflow:21.07-${TF_VERSION}-py3
 
+# Workaround for nvidia repos.
+RUN rm -rf /etc/apt/sources.list.d/cuda.list /etc/apt/sources.list.d/nvidia-ml.list
+
 ARG INSTALL_ZSH="false"
 # [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="true"

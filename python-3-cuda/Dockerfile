@@ -3,6 +3,9 @@ ARG CUDNN_VERSION="8"
 ARG UBUNTU_VERSION="20.04"
 FROM nvidia/cuda:${CUDA_VERSION}-cudnn${CUDNN_VERSION}-runtime-ubuntu${UBUNTU_VERSION}
 
+# Workaround for nvidia repos.
+RUN rm -rf /etc/apt/sources.list.d/cuda.list /etc/apt/sources.list.d/nvidia-ml.list
+
 # Python version
 ARG PYTHON_VERSION="3"
 # [Option] Install zsh

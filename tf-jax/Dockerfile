@@ -1,4 +1,4 @@
-FROM zhengma/python-3-cuda:latest
+FROM python-3-cuda:11.4.1
 
 # Options:
 #   tensorflow
