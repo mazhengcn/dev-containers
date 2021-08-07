@@ -1,5 +1,5 @@
 ARG TF_VERSION="tf2"
-FROM nvcr.io/nvidia/tensorflow:21.06-${TF_VERSION}-py3
+FROM nvcr.io/nvidia/tensorflow:21.07-${TF_VERSION}-py3
 
 ARG INSTALL_ZSH="false"
 # [Option] Upgrade OS packages to their latest versions
