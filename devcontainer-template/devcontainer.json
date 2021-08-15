@@ -1,7 +1,13 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.158.0/containers/python-3
 {
   "name": "",
-  "build": { "dockerfile": "Dockerfile", "args": { "--pull": "false" } },
-
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "--pull": "false"
+    }
+  },
   // Set *default* container specific settings.json values on container create.
   "settings": {
     "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
@@ -14,40 +20,34 @@
     "python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
     "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
   },
-
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
     "ms-python.python",
     "ms-python.vscode-pylance",
     "esbenp.prettier-vscode"
   ],
-
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [8891],
-
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "pip3 install --no-cache-dir -r requirements.txt",
-
   // Use 'postStartCommand' to run commands after the container is started.
   // "postStartCommand": "nohup bash -c 'jupyter lab --ip=0.0.0.0 --port=8890 --allow-root &'",
-
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   // "remoteUser": "vscode",
-
   // Runtime args.
-  "runArgs": ["--name=modnet_dev", "--gpus=all", "--shm-size=1g"],
-
+  "runArgs": [
+    "--name=modnet_dev",
+    "--gpus=all",
+    "--shm-size=1g"
+  ],
   // Bind working directory.
   "workspaceMount": "type=bind,consistency=cached,src=/path/code,dst=/workspace/code",
-
   // Volume mount data folder.
   "mounts": [
     "type=volume,src=data_volume,target=${containerWorkspaceFolder}/data"
   ],
-
   // Default working directory
   "workspaceFolder": "/workspace/code",
-
   // Keep container running after disconnect.
   "shutdownAction": "none"
 }

@@ -25,7 +25,7 @@ RUN rm -rf /etc/apt/sources.list.d/cuda.list /etc/apt/sources.list.d/nvidia-ml.l
 
 # Pick up some TF dependencies
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get install -y --no-install-recommends \
-    # build-essential \
+    build-essential \
     cuda-command-line-tools-${CUDA/./-} \
     libcublas-${CUDA/./-} \
     cuda-nvrtc-${CUDA/./-} \
