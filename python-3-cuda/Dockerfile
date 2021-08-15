@@ -8,8 +8,8 @@ FROM nvidia/cuda${ARCH:+-$ARCH}:${CUDA}.1-base-ubuntu${UBUNTU_VERSION} as base
 ARG ARCH
 ARG CUDA
 # ARG CUDNN=8.1.0.77-1
-ARG CUDNN=8.2.2.26-1
 # ARG CUDNN=8.2.0.53-1
+ARG CUDNN=8.2.2.26-1
 ARG CUDNN_MAJOR_VERSION=8
 ARG LIB_DIR_PREFIX=x86_64
 # ARG LIBNVINFER=7.2.2-1
@@ -24,7 +24,8 @@ RUN rm -rf /etc/apt/sources.list.d/cuda.list /etc/apt/sources.list.d/nvidia-ml.l
     && echo "deb https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list
 
 # Pick up some TF dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get install -y --no-install-recommends \
+    # build-essential \
     cuda-command-line-tools-${CUDA/./-} \
     libcublas-${CUDA/./-} \
     cuda-nvrtc-${CUDA/./-} \
@@ -32,13 +33,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurand-${CUDA/./-} \
     libcusolver-${CUDA/./-} \
     libcusparse-${CUDA/./-} \
+    curl \
     libcudnn8=${CUDNN}+cuda${CUDA} \
-    # libfreetype6-dev \
-    # libhdf5-serial-dev \
+    libfreetype6-dev \
+    libhdf5-serial-dev \
     libzmq3-dev \
-    # pkg-config \
-    # software-properties-common \
-    # unzip
+    pkg-config \
+    software-properties-common \
+    unzip \
     && apt-mark hold libcudnn8 \
     && apt-get autoremove -y && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
@@ -53,7 +55,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #     && rm -rf /var/lib/apt/lists/*; }
 
 # For CUDA profiling, TensorFlow requires CUPTI.
-ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH /usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
 # Link the libcuda stub to the location where tensorflow is searching for it and reconfigure
 # dynamic linker run-time bindings
