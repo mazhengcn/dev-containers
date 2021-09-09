@@ -34,10 +34,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 ARG PYTHON_VERSION="3.9.7"
-ARG PYTHON_INSTALL_PATH=/usr/local/python
+ARG PYTHON_PATH=/usr/local/python
 # Setup default python tools in a venv via pipx to avoid conflicts
 ENV PIPX_HOME=/usr/local/py-utils \
     PIPX_BIN_DIR=/usr/local/py-utils/bin
-ENV PATH=${PATH}:${PIPX_BIN_DIR}
-RUN bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/python-debian.sh")" -- "${PYTHON_VERSION}" "${PYTHON_INSTALL_PATH}" "${PIPX_HOME}" "automatic" "true" "true" "false" \ 
+ENV PATH=${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}
+RUN bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/python-debian.sh")" -- "${PYTHON_VERSION}" "${PYTHON_PATH}" "${PIPX_HOME}" "${USERNAME}" "true" "true" "false" \ 
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
