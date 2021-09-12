@@ -36,8 +36,11 @@
   "workspaceMount": "type=volume,src=overleaf,target=${containerWorkspaceFolder}",
 
   // Default working directory
-  "workspaceFolder": "/workspaces"
+  "workspaceFolder": "/workspaces",
 
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   //   "remoteUser": "vscode"
+
+  // Keep container running after disconnect.
+  "shutdownAction": "none"
 }
