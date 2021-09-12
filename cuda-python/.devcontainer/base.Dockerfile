@@ -20,9 +20,12 @@ COPY library-scripts/cuda-ubuntu.sh /tmp/library-scripts/
 RUN bash /tmp/library-scripts/cuda-ubuntu.sh "${CUDA}" "${CUDNN}" \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/library-scripts/
 
-ARG INSTALL_ZSH="false"
+# For CUDA profiling, TensorFlow requires CUPTI.
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
+
+ARG INSTALL_ZSH=false
 # [Option] Upgrade OS packages to their latest versions
-ARG UPGRADE_PACKAGES="true"
+ARG UPGRADE_PACKAGES=true
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=none
 ARG USER_UID=0
@@ -33,7 +36,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && bash -c "$(curl -fsSL "https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/common-debian.sh")" -- "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-ARG PYTHON_VERSION="3.9.7"
+ARG PYTHON_VERSION=3.9.7
 ARG PYTHON_PATH=/usr/local/python
 # Setup default python tools in a venv via pipx to avoid conflicts
 ENV PIPX_HOME=/usr/local/py-utils \

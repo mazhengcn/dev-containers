@@ -1,4 +1,6 @@
-FROM zhengma/python-cuda:3.9-11.4
+# [Choice] CUDA and Python version: 11.4-3.9
+ARG VARIANT=11.4-3.9
+FROM zhengma/cuda-python:${VARIANT}
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 COPY requirements-dev.txt /tmp/pip-tmp/

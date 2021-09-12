@@ -33,9 +33,9 @@ apt-get install -y --no-install-recommends \
     libcudnn8=${CUDNN_VERSION}+cuda${CUDA_VERSION} \
     libfreetype6-dev \
     libhdf5-serial-dev \
-    libzmq3-dev \
-    pkg-config \
-    software-properties-common
+    libzmq3-dev
+    # pkg-config \
+    # software-properties-common
 
 # Install TensorRT if not building for PowerPC
 # NOTE: libnvinfer uses cuda11.1 versions
@@ -45,14 +45,11 @@ apt-get install -y --no-install-recommends \
 #     && apt-get clean \
 #     && rm -rf /var/lib/apt/lists/*; }
 
-apt-mark hold libcudnn8
-apt-get autoremove -y && apt-get clean -y
-rm -rf /var/lib/apt/lists/*
-
-# For CUDA profiling, TensorFlow requires CUPTI.
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
-
 # Link the libcuda stub to the location where tensorflow is searching for it and reconfigure
 # dynamic linker run-time bindings
 ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1
 echo "/usr/local/cuda/lib64/stubs" > /etc/ld.so.conf.d/z-cuda-stubs.conf && ldconfig
+
+apt-mark hold libcudnn8
+apt-get autoremove -y && apt-get clean -y
+rm -rf /var/lib/apt/lists/*
