@@ -19,6 +19,13 @@
     "eamodio.gitlens"
   ],
 
+  // Runtime args for using GPUs.
+  "runArgs": [
+    "--name=latex",
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
