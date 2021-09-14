@@ -5,12 +5,7 @@
   "build": { "dockerfile": "Dockerfile" },
 
   // Set *default* container specific settings.json values on container create.
-  "settings": {
-    "latex-workshop.view.pdf.viewer": "tab",
-    "[latex]": {
-      "editor.formatOnSave": false
-    }
-  },
+  "settings": { "latex-workshop.view.pdf.viewer": "tab" },
 
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
