@@ -44,7 +44,14 @@
   "extensions": ["ms-python.python", "ms-python.vscode-pylance"],
 
   // Runtime args for using GPUs.
-  "runArgs": ["--name=project_name", "--gpus=all", "--shm-size=1g"],
+  "runArgs": [
+    "--name=project_name",
+    "--gpus=all",
+    "--shm-size=1g",
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
