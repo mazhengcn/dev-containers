@@ -14,30 +14,15 @@
   // Set *default* container specific settings.json values on container create.
   "settings": {
     "python.languageServer": "Pylance",
-    // Python linting settings.
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": [
-      "--max-line-length=88",
-      "--extend-ignore=E203"
-    ],
-    // Python formater settings.
-    "python.formatting.provider": "black",
-    "[python]": {
-      "editor.codeActionsOnSave": { "source.organizeImports": true },
-      "editor.tabSize": 4
-    },
-    "python.sortImports.args": ["--profile=black"],
     "python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
-    "python.formatting.blackPath": "/usr/local/py-utils/bin/black"
-    // "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
-    // "python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
-    // "python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
-    // "python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
-    // "python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
-    // "python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
-    // "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
+    "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+    "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+    "python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
+    "python.linting.banditPath": "/usr/local/py-utils/bin/bandit",
+    "python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+    "python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
+    "python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
+    "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
   },
 
   // Add the IDs of extensions you want installed when the container is created.
