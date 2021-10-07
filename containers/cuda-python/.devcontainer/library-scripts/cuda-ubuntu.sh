@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 CUDA_VERSION=${1:-"11.4"}
-CUDNN_VERSION=${2:-"8.2.2.26-1"}
+CUDNN_VERSION=${2:-"8.2.4.15-1"}
 CUDNN_MAJOR_VERSION=${3:-"8"}
 LIB_DIR_PREFIX=${4:-"x86_64"}
 ARCH=${5:-""}
