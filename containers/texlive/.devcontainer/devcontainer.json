@@ -17,6 +17,7 @@
   // Runtime args for using GPUs.
   "runArgs": [
     "--name=latex",
+    "--init",
     "--cap-add=SYS_PTRACE",
     "--security-opt",
     "seccomp=unconfined"
