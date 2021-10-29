@@ -1,5 +1,5 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.1/containers/python-3
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.205.0/containers/python-3
 {
   "name": "Project Name",
   "build": {
@@ -10,16 +10,20 @@
       "VARIANT": "11.4-3.9"
     }
   },
-
   // Set *default* container specific settings.json values on container create.
   "settings": {
     "python.defaultInterpreterPath": "/usr/local/python/bin/python",
-    "python.languageServer": "Pylance",
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": ["--extend-ignore=E203"],
+    "python.linting.flake8Args": [
+      "--extend-ignore=E203"
+    ],
     "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["--line-length=79"],
-    "python.sortImports.args": ["--profile=black"],
+    "python.formatting.blackArgs": [
+      "--line-length=79"
+    ],
+    "python.sortImports.args": [
+      "--profile=black"
+    ],
     "python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
     "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
     "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
@@ -30,41 +34,28 @@
     "python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
     "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint"
   },
-
   // Add the IDs of extensions you want installed when the container is created.
-  "extensions": ["ms-python.python", "ms-python.vscode-pylance"],
-
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ],
   // Runtime args for using GPUs.
   "runArgs": [
     "--name=project_name",
-    "--init",
     "--gpus=all",
     "--shm-size=1g",
     "--cap-add=SYS_PTRACE",
     "--security-opt",
     "seccomp=unconfined"
   ],
-
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "pip3 install --user -r requirements.txt",
-
-  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-  // "remoteUser": "vscode"
-
   // Bind working directory.
   "workspaceMount": "type=bind,consistency=cached,src=/path/to/project,dst=/workspace/project_name",
-
   // Volume mount data folder.
   "mounts": [
     "type=volume,src=data_volume,target=${containerWorkspaceFolder}/data"
   ],
-
   // Default working directory
   "workspaceFolder": "/workspace/project_name",
-
   // Keep container running after disconnect.
   "shutdownAction": "none"
 }

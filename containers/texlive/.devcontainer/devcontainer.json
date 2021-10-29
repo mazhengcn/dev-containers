@@ -1,42 +1,32 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.1/containers/ubuntu
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.205.0/containers/ubuntu
 {
   "name": "TeX Live",
-  "build": { "dockerfile": "Dockerfile" },
-
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   // Set *default* container specific settings.json values on container create.
-  "settings": { "latex-workshop.view.pdf.viewer": "tab" },
-
+  "settings": {
+    "latex-workshop.view.pdf.viewer": "tab"
+  },
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
     "james-yu.latex-workshop",
-    "esbenp.prettier-vscode",
     "eamodio.gitlens"
   ],
-
   // Runtime args for using GPUs.
   "runArgs": [
     "--name=latex",
-    "--init",
     "--cap-add=SYS_PTRACE",
     "--security-opt",
     "seccomp=unconfined"
   ],
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "uname -a",
-
   // Mount working directory.
   "workspaceMount": "type=volume,src=overleaf,target=${containerWorkspaceFolder}",
-
   // Default working directory
   "workspaceFolder": "/workspaces",
-
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
   //   "remoteUser": "vscode"
-
   // Keep container running after disconnect.
   "shutdownAction": "none"
 }
