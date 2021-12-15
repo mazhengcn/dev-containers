@@ -35,14 +35,10 @@
     "--security-opt",
     "seccomp=unconfined"
   ],
-  // Bind working directory.
-  "workspaceMount": "type=bind,consistency=cached,src=/path/to/project,dst=/workspace/project_name",
   // Volume mount data folder.
   "mounts": [
     "type=volume,src=data_volume,target=${containerWorkspaceFolder}/data"
   ],
-  // Default working directory
-  "workspaceFolder": "/workspace/project_name",
   // Keep container running after disconnect.
   "shutdownAction": "none"
 }
