@@ -1,13 +1,13 @@
 ARG UBUNTU_VERSION=20.04
 
 ARG ARCH=
-ARG CUDA=11.4
-FROM nvidia/cuda${ARCH:+-$ARCH}:${CUDA}.2-base-ubuntu${UBUNTU_VERSION}
+ARG CUDA=11.5
+FROM nvidia/cuda${ARCH:+-$ARCH}:${CUDA}.0-base-ubuntu${UBUNTU_VERSION}
 # ARCH and CUDA are specified again because the FROM directive resets ARGs
 # (but their default value is retained if set previously)
 ARG ARCH
 ARG CUDA
-ARG CUDNN=8.2.4.15-1
+ARG CUDNN=8.3.1.*
 ARG CUDNN_MAJOR_VERSION=8
 ARG LIB_DIR_PREFIX=x86_64
 # ARG LIBNVINFER=7.2.2-1
