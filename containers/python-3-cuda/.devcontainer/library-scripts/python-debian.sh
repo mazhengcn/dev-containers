@@ -249,7 +249,7 @@ install_from_source() {
     tar -xzf "/tmp/python-src/${tgz_filename}" -C "/tmp/python-src" --strip-components=1
     local config_args=""
     if [ "${OPTIMIZE_BUILD_FROM_SOURCE}" = "true" ]; then
-        config_args="--enable-optimizations"
+        config_args="--enable-optimizations --with-lto"
     fi
     ./configure --prefix="${PYTHON_INSTALL_PATH}" --with-ensurepip=install ${config_args}
     make -j 8

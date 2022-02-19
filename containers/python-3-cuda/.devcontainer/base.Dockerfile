@@ -22,12 +22,12 @@ RUN bash /tmp/library-scripts/cuda-ubuntu.sh "${CUDA}" "${CUDNN}" \
 # For CUDA profiling, TensorFlow requires CUPTI.
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
 
-ARG INSTALL_ZSH="false"
+ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="true"
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
-ARG USERNAME="none"
-ARG USER_UID=0
+ARG USERNAME=vscode
+ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
@@ -42,7 +42,7 @@ ARG PYTHON_PATH=/usr/local/python
 ENV PIPX_HOME=/usr/local/py-utils \
     PIPX_BIN_DIR=/usr/local/py-utils/bin
 ENV PATH=${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}
-RUN bash /tmp/library-scripts/python-debian.sh "${PYTHON_VERSION}" "${PYTHON_PATH}" "${PIPX_HOME}" "${USERNAME}" "false" "true" "true" "true" \ 
+RUN bash /tmp/library-scripts/python-debian.sh "${PYTHON_VERSION}" "${PYTHON_PATH}" "${PIPX_HOME}" "${USERNAME}" "true" "true" "true" "true" \ 
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Remove library scripts for final image
