@@ -1,5 +1,5 @@
 # [Choice] CUDA and Python version: 11.4-3.9
-ARG VARIANT=11.4-3.9
+ARG VARIANT=3.10-11.5
 FROM zhengma/python-3-cuda:${VARIANT}
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
