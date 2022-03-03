@@ -112,8 +112,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         manpages \
         manpages-dev \
         init-system-helpers"
-        # liblttng-ust0
-   
+        
     # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
     if [ "${ADD_NON_FREE_PACKAGES}" = "true" ]; then
         # Bring in variables from /etc/os-release like VERSION_CODENAME
@@ -131,7 +130,7 @@ if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
         sed -i "s/deb-src http:\/\/security\.debian\.org\/debian-security ${VERSION_CODENAME}-security main/deb http:\/\/security\.debian\.org\/debian-security ${VERSION_CODENAME}-security main contrib non-free/" /etc/apt/sources.list
         echo "Running apt-get update..."
         apt-get update
-        package_list="${package_list} manpages-posix manpages-posix-dev"
+        package_list="${package_list}"
     else
         apt_get_update_if_needed
     fi
