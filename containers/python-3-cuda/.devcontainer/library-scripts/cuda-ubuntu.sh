@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 CUDA_VERSION=${1:-"11.4"}
-CUDNN_VERSION=${2:-"8.2.4.15-1"}
+CUDNN_VERSION=${2:-"8.2.4.15"}
 CUDNN_MAJOR_VERSION=${3:-"8"}
 LIB_DIR_PREFIX=${4:-"x86_64"}
 ARCH=${5:-""}
@@ -30,7 +30,7 @@ apt-get install -y --no-install-recommends \
     libcurand-${CUDA_VERSION/./-} \
     libcusolver-${CUDA_VERSION/./-} \
     libcusparse-${CUDA_VERSION/./-} \
-    libcudnn8=${CUDNN_VERSION}+cuda${CUDA_VERSION} \
+    libcudnn8=${CUDNN_VERSION}-1+cuda${CUDA_VERSION} \
     libfreetype6-dev \
     libhdf5-serial-dev \
     libzmq3-dev

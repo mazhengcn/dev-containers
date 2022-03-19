@@ -7,7 +7,8 @@ FROM nvidia/cuda${ARCH:+-$ARCH}:${CUDA}.1-base-ubuntu${UBUNTU_VERSION}
 # (but their default value is retained if set previously)
 ARG ARCH
 ARG CUDA
-ARG CUDNN=8.3.1.22-1
+# 8.2.0.53 for 11.3
+ARG CUDNN=8.3.1.22
 ARG CUDNN_MAJOR_VERSION=8
 ARG LIB_DIR_PREFIX=x86_64
 # ARG LIBNVINFER=7.2.2-1
@@ -26,8 +27,8 @@ ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="true"
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
-ARG USERNAME=vscode
-ARG USER_UID=1000
+ARG USERNAME=none
+ARG USER_UID=0
 ARG USER_GID=$USER_UID
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     # Remove imagemagick due to https://security-tracker.debian.org/tracker/CVE-2019-10131
@@ -38,11 +39,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 ARG PYTHON_VERSION=3.10
 ARG PYTHON_PATH=/usr/local/python
-# Setup default python tools in a venv via pipx to avoid conflicts
-ENV PIPX_HOME=/usr/local/py-utils \
-    PIPX_BIN_DIR=/usr/local/py-utils/bin
-ENV PATH=${PYTHON_PATH}/bin:${PATH}:${PIPX_BIN_DIR}
-RUN bash /tmp/library-scripts/python-debian.sh "${PYTHON_VERSION}" "${PYTHON_PATH}" "${PIPX_HOME}" "${USERNAME}" "true" "true" "true" "true" \ 
+ENV PATH=${PYTHON_PATH}/bin:${PATH}
+RUN bash /tmp/library-scripts/python-debian.sh "${PYTHON_VERSION}" "${PYTHON_PATH}" "none" "${USERNAME}" "false" "false" "true" "true" \ 
     && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Remove library scripts for final image
