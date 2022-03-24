@@ -1,29 +1,29 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.217.4/containers/ubuntu
 {
-    "name": "LaTeX and Markdown Editing",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
-    // Set *default* container specific settings.json values on container create.
-    "settings": {
-        "latex-workshop.view.pdf.viewer": "tab",
-        "terminal.integrated.defaultProfile.linux": "zsh"
-    },
-    // Add the IDs of extensions you want installed when the container is created.
-    "extensions": [
-        "james-yu.latex-workshop",
-        "eamodio.gitlens",
-        "vivaxy.vscode-conventional-commits",
-        "yzhang.markdown-all-in-one",
-        "DavidAnson.vscode-markdownlint",
-        "shd101wyy.markdown-preview-enhanced",
-        "bierner.github-markdown-preview"
-    ],
-    // Runtime args for using GPUs.
-    "runArgs": [
-        "--name=latex_markdown"
-    ],
-    // Keep container running after disconnect.
-    "shutdownAction": "none"
+  "name": "LaTeX and Markdown Editing",
+
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "latex-workshop.view.pdf.viewer": "tab"
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "james-yu.latex-workshop",
+    "eamodio.gitlens",
+    "vivaxy.vscode-conventional-commits",
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+    "shd101wyy.markdown-preview-enhanced",
+    "bierner.github-markdown-preview"
+  ],
+
+  // Runtime args for using GPUs.
+  "runArgs": ["--name=latex_markdown"]
+
+  // Keep container running after disconnect.
+  // "shutdownAction": "none"
 }

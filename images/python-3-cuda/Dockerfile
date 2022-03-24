@@ -23,7 +23,7 @@ RUN bash /tmp/library-scripts/cuda-ubuntu.sh "${CUDA}" "${CUDNN}" \
 # For CUDA profiling, TensorFlow requires CUPTI.
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64
 
-ARG INSTALL_ZSH="true"
+ARG INSTALL_ZSH="false"
 # [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="true"
 # Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.

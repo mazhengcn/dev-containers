@@ -1,0 +1,24 @@
+absl-py
+numpy
+scipy
+
+# Tensorflow cpu version
+tensorflow_datasets
+tensorflow-cpu>=2.8.0
+
+# Install jax and jaxlib
+jax>=0.3.1
+jaxlib==0.3.2+cuda11.cudnn82
+--find-links https://storage.googleapis.com/jax-releases/jax_releases.html
+
+# Install Haiku, Optax
+git+https://github.com/deepmind/dm-haiku
+git+https://github.com/deepmind/optax
+
+# Install ml_collections from github repo
+git+https://github.com/google/ml_collections
+
+# For development
+black
+isort
+flake8
