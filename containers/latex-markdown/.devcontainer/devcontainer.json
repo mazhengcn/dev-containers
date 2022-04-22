@@ -1,29 +1,40 @@
 {
-  "name": "LaTeX and Markdown Editing",
+    // Container name displayed in UI.
+    "name": "LaTeX Editing Dev Container",
 
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+    // Build image
+    "build": {"dockerfile": "Dockerfile"},
 
-  // Set *default* container specific settings.json values on container create.
-  "settings": {
-    "latex-workshop.view.pdf.viewer": "tab"
-  },
+    // Add development tools.
+    "features": {
+        "common": {
+            "username": "automatic",
+            "uid": "automatic",
+            "gid": "automatic",
+            "installZsh": true,
+            "installOhMyZsh": true,
+            "upgradePackages": true,
+            "nonFreePackages": true
+        }
+    },
 
-  // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-    "james-yu.latex-workshop",
-    "eamodio.gitlens",
-    "vivaxy.vscode-conventional-commits",
-    "yzhang.markdown-all-in-one",
-    "DavidAnson.vscode-markdownlint",
-    "shd101wyy.markdown-preview-enhanced",
-    "bierner.github-markdown-preview"
-  ],
+    // Set *default* container specific settings.json values on container create.
+    "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "latex-workshop.view.pdf.viewer": "tab"
+    },
 
-  // Runtime args for using GPUs.
-  "runArgs": ["--name=latex_markdown"]
+    // Add the IDs of extensions you want installed when the container is created.
+    "extensions": [
+        "james-yu.latex-workshop",
+        "eamodio.gitlens",
+    ],
 
-  // Keep container running after disconnect.
-  // "shutdownAction": "none"
+    // Runtime args for using GPUs.
+    "runArgs": [
+        "--name=texlive"
+    ],
+
+    // Non-root user
+    "remoteUser": "vscode"
 }
