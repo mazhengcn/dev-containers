@@ -32,7 +32,7 @@ ENV PATH="/home/tensorflow/.local/bin:${PATH}" \
     TF_CPP_MIN_LOG_LEVEL=3
 
 # Copy this version of of the model garden into the image
-COPY --from=od-build /home/tensorflow/models /home/tensorflow/models
+# COPY --from=od-build /home/tensorflow/models /home/tensorflow/models
 COPY --from=od-build /home/tensorflow/.local /home/tensorflow/.local
 
 USER tensorflow
