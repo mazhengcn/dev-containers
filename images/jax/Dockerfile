@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG VERSION=0.3.7
+ARG VERSION=0.3.8
 ARG PYTHON_VERSION=3.10
 ARG CUDA_VERSION=11.6
 
@@ -21,8 +21,7 @@ RUN python -m pip install --upgrade --no-cache-dir pip \
     optax==0.1.2 \
     tensorflow-datasets==4.5.2 \
     tensorflow-cpu==2.8.0 \
-    # Temporary fix for chex
-    chex@git+https://github.com/deepmind/chex.git@7552dfcbe7748caf84c9074fcb61e3154b8f1dc6
+    chex==0.1.3
 
 FROM zhengma/python-3-cuda:${PYTHON_VERSION}-${CUDA_VERSION}
 ARG PYTHON_VERSION
