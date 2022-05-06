@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
 
+ARG VERSION=0.3.10
 ARG CUDA_MAJOR_VERSION=11
 ARG CUDA_MINOR_VERSION=6
 ARG CUDA_PATCH_VERSION=2
@@ -33,7 +34,7 @@ RUN ${PYTHON_PATH}/bin/python -m pip install --upgrade --no-cache-dir pip \
     absl-py>=1.0.0 \
     ml-collections>=0.1.1 \
     numpy>=1.22.2 \
-    jax[cuda11_cudnn82]>=${VERSION} -f https://storage.googleapis.com/jax-releases/jax_releases.html \
+    jax[cuda]>=${VERSION} -f https://storage.googleapis.com/jax-releases/jax_releases.html \
     dm-haiku>=0.0.6 \
     optax>=0.1.2 \
     tensorflow-datasets>=4.5.2 \
