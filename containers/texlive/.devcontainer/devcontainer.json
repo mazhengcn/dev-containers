@@ -27,7 +27,7 @@
     // Add the IDs of extensions you want installed when the container is created.
     "extensions": [
         "james-yu.latex-workshop",
-        "eamodio.gitlens",
+        "eamodio.gitlens"
     ],
 
     // Runtime args for using GPUs.
