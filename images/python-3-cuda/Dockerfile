@@ -1,32 +1,29 @@
 # syntax=docker/dockerfile:1
 
 ARG CUDA_MAJOR_VERSION=11
-ARG CUDA_MINOR_VERSION=6
+ARG CUDA_MINOR_VERSION=5
 ARG CUDA_PATCH_VERSION=2
 ARG CUDA_VERSION=${CUDA_MAJOR_VERSION}.${CUDA_MINOR_VERSION}
 ARG CUDNN_MAJOR_VERSION=8
 ARG NVINFER_MAJOR_VERSION=8
 
-FROM nvidia/cuda:${CUDA_VERSION}.${CUDA_PATCH_VERSION}-cudnn${CUDNN_MAJOR_VERSION}-devel-ubuntu20.04 AS lib
+FROM nvidia/cuda:${CUDA_VERSION}.${CUDA_PATCH_VERSION}-cudnn${CUDNN_MAJOR_VERSION}-devel-ubuntu20.04 AS cuda-lib
 ARG NVINFER_MAJOR_VERSION
-# Workaround for nvidia.cn repo
-RUN rm -rf /etc/apt/sources.list.d/cuda.list /etc/apt/sources.list.d/nvidia-ml.list \
-    && apt-key adv --fetch-keys https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/x86_64/7fa2af80.pub \
-    && echo "deb https://developer.download.nvidia.cn/compute/cuda/repos/ubuntu2004/x86_64 /" > /etc/apt/sources.list.d/cuda.list
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libnvinfer${NVINFER_MAJOR_VERSION} libnvinfer-plugin${NVINFER_MAJOR_VERSION} \
-    && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+RUN --mount=type=cache,target=/var/cache/apt \
+    apt-get update && apt-get install --no-install-recommends -y \
+    libnvinfer${NVINFER_MAJOR_VERSION} \
+    libnvinfer-plugin${NVINFER_MAJOR_VERSION} \
+    && rm -rf /var/lib/apt/lists/*
 
-FROM python:3.10-slim-bullseye
+FROM python:3.10-slim
 ARG CUDA_MAJOR_VERSION
 ARG CUDA_VERSION
 ARG CUDNN_MAJOR_VERSION
 ARG NVINFER_MAJOR_VERSION
-SHELL ["/bin/bash", "-c"]
 
-COPY --from=lib /usr/local/cuda/compat /usr/local/cuda/compat
-COPY --from=lib /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1
-COPY --from=lib \
+COPY --from=cuda-lib /usr/local/cuda/compat /usr/local/cuda/compat
+COPY --from=cuda-lib /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1
+COPY --from=cuda-lib \
     /usr/local/cuda/lib64/libcublas.so.${CUDA_MAJOR_VERSION} \
     /usr/local/cuda/lib64/libcublasLt.so.${CUDA_MAJOR_VERSION} \
     /usr/local/cuda/lib64/libcudart.so.${CUDA_MAJOR_VERSION}.0 \
@@ -42,7 +39,7 @@ COPY --from=lib \
     /usr/local/cuda/lib64/libnvrtc-builtins.so.${CUDA_VERSION} \
     /usr/local/cuda/lib64/libnvrtc.so.${CUDA_MAJOR_VERSION}.2 \
     /usr/local/cuda/lib64/
-COPY --from=lib \
+COPY --from=cuda-lib \
     /usr/lib/x86_64-linux-gnu/libcudnn.so.${CUDNN_MAJOR_VERSION} \
     /usr/lib/x86_64-linux-gnu/libcudnn_adv_infer.so.${CUDNN_MAJOR_VERSION} \
     /usr/lib/x86_64-linux-gnu/libcudnn_adv_train.so.${CUDNN_MAJOR_VERSION} \
@@ -53,9 +50,13 @@ COPY --from=lib \
     /usr/lib/x86_64-linux-gnu/libnvinfer.so.${NVINFER_MAJOR_VERSION} \
     /usr/lib/x86_64-linux-gnu/libnvinfer_plugin.so.${NVINFER_MAJOR_VERSION} \
     /usr/lib/x86_64-linux-gnu/
-COPY --from=lib /usr/local/cuda/bin/ptxas /usr/local/cuda/bin/ptxas
+COPY --from=cuda-lib /usr/local/cuda/bin/ptxas /usr/local/cuda/bin/ptxas
 
-ENV PATH=/usr/local/cuda/bin:$PATH \
-    LIBRARY_PATH=/usr/local/cuda/lib64/stubs \
-    LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu \
-    LC_ALL=C.UTF-8
+ENV PATH=/usr/local/cuda/bin:$PATH
+ENV LIBRARY_PATH=/usr/local/cuda/lib64/stubs
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu
+ENV LC_ALL=C.UTF-8
+
+# nvidia-container-runtime
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
