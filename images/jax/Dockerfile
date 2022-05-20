@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG VERSION=0.3.12
+ARG VERSION=0.3.13
 ARG PYTHON_VERSION=3.10
 ARG CUDA_VERSION=11.6
 
