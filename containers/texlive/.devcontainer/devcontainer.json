@@ -1,14 +1,14 @@
 {
     // Container name displayed in UI.
     "name": "LaTeX Editing Dev Container",
-
     // Build image
-    "build": {"dockerfile": "Dockerfile"},
-
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
     // Add development tools.
     "features": {
         "common": {
-            "username": "automatic",
+            "username": "texlive",
             "uid": "automatic",
             "gid": "automatic",
             "installZsh": true,
@@ -17,24 +17,25 @@
             "nonFreePackages": true
         }
     },
-
-    // Set *default* container specific settings.json values on container create.
-    "settings": {
-        "terminal.integrated.defaultProfile.linux": "zsh",
-        "latex-workshop.view.pdf.viewer": "tab"
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                // "terminal.integrated.defaultProfile.linux": "zsh",
+                "latex-workshop.view.pdf.viewer": "tab"
+            },
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "james-yu.latex-workshop",
+                "eamodio.gitlens"
+            ]
+        }
     },
-
-    // Add the IDs of extensions you want installed when the container is created.
-    "extensions": [
-        "james-yu.latex-workshop",
-        "eamodio.gitlens"
-    ],
-
     // Runtime args for using GPUs.
     "runArgs": [
         "--name=texlive"
     ],
-
     // Non-root user
-    "remoteUser": "vscode"
+    "remoteUser": "texlive"
 }
