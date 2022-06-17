@@ -8,13 +8,7 @@
     // Add development tools.
     "features": {
         "common": {
-            "username": "texlive",
-            "uid": "automatic",
-            "gid": "automatic",
-            "installZsh": true,
-            "installOhMyZsh": true,
-            "upgradePackages": true,
-            "nonFreePackages": true
+            "username": "texlive"
         }
     },
     "customizations": {
