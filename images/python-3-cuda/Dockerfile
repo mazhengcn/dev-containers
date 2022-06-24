@@ -1,13 +1,14 @@
 # syntax=docker/dockerfile:1
 
+ARG PYTHON_VERSION=3.10
 ARG CUDA_MAJOR_VERSION=11
-ARG CUDA_MINOR_VERSION=5
+ARG CUDA_MINOR_VERSION=6
 ARG CUDA_PATCH_VERSION=2
 ARG CUDA_VERSION=${CUDA_MAJOR_VERSION}.${CUDA_MINOR_VERSION}
 ARG CUDNN_MAJOR_VERSION=8
 ARG NVINFER_MAJOR_VERSION=8
 
-FROM nvidia/cuda:${CUDA_VERSION}.${CUDA_PATCH_VERSION}-cudnn${CUDNN_MAJOR_VERSION}-devel-ubuntu20.04 AS cuda-lib
+FROM nvcr.io/nvidia/cuda:${CUDA_VERSION}.${CUDA_PATCH_VERSION}-cudnn${CUDNN_MAJOR_VERSION}-devel-ubuntu20.04 AS cuda-lib
 ARG NVINFER_MAJOR_VERSION
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update && apt-get install --no-install-recommends -y \
@@ -15,7 +16,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     libnvinfer-plugin${NVINFER_MAJOR_VERSION} \
     && rm -rf /var/lib/apt/lists/*
 
-FROM python:3.10-slim
+FROM python:${PYTHON_VERSION}-slim
 ARG CUDA_MAJOR_VERSION
 ARG CUDA_VERSION
 ARG CUDNN_MAJOR_VERSION
