@@ -17,7 +17,7 @@ RUN python -m pip install --upgrade --no-cache-dir pip \
     absl-py>=1.0.0 \
     chex>=0.1.3 \
     dm-haiku>=0.0.6 \
-    jax[cuda]==${VERSION} -f https://storage.googleapis.com/jax-releases/jax_releases.html \
+    jax[cuda]>=${VERSION} -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html \
     ml-collections>=0.1.1 \
     numpy>=1.22.3 \
     optax>=0.1.2 \
