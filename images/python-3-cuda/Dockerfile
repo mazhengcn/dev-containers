@@ -16,7 +16,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     libnvinfer-plugin${NVINFER_MAJOR_VERSION} \
     && rm -rf /var/lib/apt/lists/*
 
-FROM python:${PYTHON_VERSION}-slim
+FROM python:${PYTHON_VERSION}-slim-bullseye
 ARG CUDA_MAJOR_VERSION
 ARG CUDA_VERSION
 ARG CUDNN_MAJOR_VERSION

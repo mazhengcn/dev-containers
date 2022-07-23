@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1
 
-ARG VERSION=0.3.14
+ARG VERSION=0.3.15
 ARG PYTHON_VERSION=3.10
 ARG CUDA_VERSION=11.6
 
-FROM python:${PYTHON_VERSION}-slim AS py
+FROM python:${PYTHON_VERSION}-slim-bullseye AS py
 ARG VERSION
 
 RUN --mount=type=cache,target=/var/cache/apt \
